@@ -27,7 +27,6 @@ namespace Frontend
         /// </summary>
         public void CodeView()
         {
-
             var t = new TablePrinter("", "Text Dosyasındaki kodunuz");
             for (int i = 0; i < SourceText.Length; i++)
             {
@@ -50,7 +49,7 @@ namespace Frontend
             if (LineNumber < Scanner.FileLineNumber())
             {
                 Line = Scanner.ReadLine(this.LineNumber);
-                ControlLine(Line);
+                ControlLine(Line);//Satırda değişken kontrolü 
             }
             else
             {
@@ -60,7 +59,7 @@ namespace Frontend
 
         private void ControlLine(string[] line)
         {
-            Console.WriteLine(String.Format("{0}. satırda {1} değişken tipi bulundu.", LineNumber + 1, Token.Control(line)));
+            Console.WriteLine(String.Format("{0}. satırda {1} değişken tipi bulundu.", LineNumber + 1, Token.Controls(line)));
             Nextline();
         }
 
