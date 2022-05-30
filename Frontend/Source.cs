@@ -4,43 +4,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Utilities;
+
 namespace Frontend
 {
     public class Source
     {
         private string[] SourceText { get; set; }
-        private string Line { get; set; }
-        private int LineNum { get; set; }
-        public Source()
+        private string[] Line { get; set; }
+        private int LineNumber { get; set; }
+        /// <summary>
+        /// Verilen dizinle kodu işleme alır.
+        /// </summary>
+        /// <param name="path">Kod dizinini veriniz.</param>
+        public Source(string path)
         {
-            this.LineNum = 0;
+            this.LineNumber = 0;
+            this.SourceText = Scanner.FileRead(path);
         }
-
-        public void FileRead(string path)
+        /// <summary>
+        /// Text dosyasındaki kodu yazar.
+        /// </summary>
+        public void CodeView()
         {
-            try
-            {
-                this.SourceText = File.ReadAllLines(path);
-            }
-            catch (Exception)
-            {
 
-                throw;
+            var t = new TablePrinter("", "Text Dosyasındaki kodunuz");
+            for (int i = 0; i < SourceText.Length; i++)
+            {
+                t.AddRow(i + 1, SourceText[i]);
             }
+            t.AddRow("---", "--------------");
+            t.AddRow("->", String.Format("Kodunuz {0} satır", Scanner.FileLineNumber()));
+            t.Print();
 
         }
         public int getLineNum()
         {
-            return this.LineNum;
+            return this.LineNumber;
         }
-        public void readline()
+        /// <summary>
+        /// Satır okuma işlemi
+        /// </summary>
+        public void ReadLine()
         {
-            Line = SourceText[LineNum];
+            if (LineNumber < Scanner.FileLineNumber())
+            {
+                Line = Scanner.ReadLine(this.LineNumber);
+                ControlLine(Line);
+            }
+            else
+            {
+                Console.WriteLine("------kod buraya kadar----");
+            }
         }
-        public void nextline()
+
+        private void ControlLine(string[] line)
         {
-            LineNum++;
-            readline();
+            Console.WriteLine(String.Format("{0}. satırda {1} değişken tipi bulundu.", LineNumber + 1, Token.Control(line)));
+            Nextline();
         }
+
+        public void Nextline()
+        {
+            LineNumber++;
+            ReadLine();
+        }
+
     }
 }

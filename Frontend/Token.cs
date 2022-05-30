@@ -6,26 +6,24 @@ using System.Threading.Tasks;
 
 namespace Frontend
 {
-    public class Token
+    public static class Token
     {
-        protected string text;
-        protected object value;
-        protected Source source;
-        protected int lineNum;
-
-        private readonly string[] tokens = { "asd", "asd", "asd" };
-        public Token(Source source)
+        private static readonly string[] tokens = { "int", "string", "double" };
+        private static readonly string[] operators = { "+", "-", "/", "*", "=", "(", ")", ";" };
+        public static string Control(string[] line)
         {
-
-            this.source = source;
-            lineNum = source.getLineNum();
-
-            extract();
+            string info = String.Empty;
+            foreach (var item in line)
+            {
+                foreach (var token in tokens)
+                {
+                    if (item.Contains(token))
+                    {
+                        info = token;
+                    }
+                }
+            }
+            return info;
         }
-        protected void extract()
-        {
-
-        }
-
     }
 }

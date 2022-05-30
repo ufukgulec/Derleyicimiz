@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Frontend
 {
-    internal class Parser
+    public class Parser
     {
     }
 }

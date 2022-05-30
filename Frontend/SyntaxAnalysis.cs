@@ -8,5 +8,6 @@ namespace Frontend
 {
     internal class SyntaxAnalysis
     {
+
     }
 }

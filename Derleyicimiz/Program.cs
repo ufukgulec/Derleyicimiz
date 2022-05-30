@@ -8,8 +8,12 @@ namespace Derleyicimiz
 
         static void Main(string[] args)
         {
-            Source source = new Source();
-            source.FileRead("../../../../Kod.txt");
+            Source source = new Source("../../../../Kod.txt");
+
+            source.CodeView();
+
+            source.ReadLine();
+
         }
     }
 }
