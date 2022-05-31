@@ -12,7 +12,7 @@ namespace Derleyicimiz
 
             source.CodeView();
 
-            source.ReadLine();
+            source.Compile();
 
         }
     }

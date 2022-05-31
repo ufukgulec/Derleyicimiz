@@ -9,8 +9,8 @@ namespace Frontend
 {
     public static class Token
     {
+        private static string[] line;
         private static readonly string[] variables = { "int", "string", "double" };
-        private static readonly string[] operators = { "+", "-", "/", "*", "=", "(", ")", ";" };
         /// <summary>
         /// Gelen satırda değişken kontrolü yapar.
         /// </summary>
@@ -18,11 +18,21 @@ namespace Frontend
         /// <returns></returns>
         public static string Controls(string[] line)
         {
-            var b = FirstLetter(line);
-            var a = VariableControl(line);
             string info = String.Empty;
+            Token.line = line;
 
-            return info;
+            if (!FirstLetter())
+            {
+                return "ilk karakter hatası var...";
+            }
+            else if (!VariableControl())
+            {
+                return "değişken tanımlama hatası var...";
+            }
+            else
+            {
+                return "tanımlamalar hatasız";
+            }
         }
 
         /// <summary>
@@ -31,29 +41,29 @@ namespace Frontend
         /// </summary>
         /// <param name="list">Kodun diziye çevrilmiş hali</param>
         /// <returns>Token rakamsal veri değilse ilk karakteri rakam ise False döndürür.</returns>
-        private static bool FirstLetter(string[] list)
+        private static bool FirstLetter()
         {
             Regex regex = new Regex("^\\d*$"); //Sadece Rakam
             bool control = true;
 
-            foreach (var item in list)
+            foreach (var item in Token.line)
             {
                 if (regex.IsMatch(item))
                 {
-                    //Console.WriteLine(item + "-> rakamsal veri");
-                    control = true;
+                    Console.WriteLine(item + " -> rakamsal veri");
+                    //control = true;
                 }
                 else
                 {
                     if (regex.IsMatch(item[0].ToString()))
                     {
-                        //Console.WriteLine(item + "-> düzenli ifade rakamsal veri ile başlayamaz");
+                        Console.WriteLine(item + " -> düzenli ifade rakamsal veri ile başlayamaz.");
                         control = false;
                     }
                     else
                     {
-                        //Console.WriteLine(item + "-> düzenli ifade");
-                        control = true;
+                        Console.WriteLine(item + " -> düzenli ifade");
+                        //control = true;
                     }
                 }
             }
@@ -65,9 +75,10 @@ namespace Frontend
         /// </summary>
         /// <param name="list">Kodun diziye çevrilmiş hali</param>
         /// <returns>Token rakamsal veri değilse ilk karakteri rakam ise False döndürür.</returns>
-        private static bool VariableControl(string[] list)
+        private static bool VariableControl()
         {
-            foreach (var item in list)
+            bool control = true;
+            foreach (var item in Token.line)
             {
                 foreach (var var in variables)
                 {
@@ -75,19 +86,20 @@ namespace Frontend
                     {
                         if (item == var)
                         {
-                            Console.WriteLine("Değişken bulundu -> " + item);
+                            //Console.WriteLine("{0} -> değişken tipi bulundu.", item);
                             break;
                         }
                         else
                         {
-                            Console.WriteLine("Hatalı Değişken bulundu -> " + item);
+                            //Console.WriteLine("{0} -> Hatalı değişken bulundu -> ", item);
+                            control = false;
                             break;
                         }
 
                     }
                 }
             }
-            return false;
+            return control;
         }
     }
 }

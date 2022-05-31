@@ -34,7 +34,9 @@ namespace Frontend
         /// <returns>Satırdaki kelimeler,operatörler</returns>
         public static string[] ReadLine(int LineNumber)
         {
-            return SourceText[LineNumber].Split(" ");
+            var line = Parser.Lexeme(SourceText[LineNumber]);
+
+            return line;
         }
     }
 }
