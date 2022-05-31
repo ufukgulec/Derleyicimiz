@@ -59,7 +59,8 @@ namespace Frontend
 
         private void ControlLine(string[] line)
         {
-            Console.WriteLine(String.Format("{0}. satırda {1} değişken tipi bulundu.", LineNumber + 1, Token.Controls(line)));
+            //Console.WriteLine(String.Format("{0}. satırda {1} değişken tipi bulundu.", LineNumber + 1, Token.Controls(line)));
+            Token.Controls(line);
             Nextline();
         }
 
