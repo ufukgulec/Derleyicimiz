@@ -13,8 +13,8 @@ namespace Frontend
         /// <summary>
         /// Bu metotta satırı lexeme ile tokenlara ayırdım...
         /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
+        /// <param name="line">String halindeki satır</param>
+        /// <returns>Lexeme yapılan dizi</returns>
         public static string[] Lexeme(string line)
         {
             string[] words = line.Split(" ");
@@ -49,7 +49,11 @@ namespace Frontend
 
             return result;
         }
-
+        /// <summary>
+        /// Bu metotta iki token yanyana gelince ayırmak için yazıldı.
+        /// </summary>
+        /// <param name="word">İki tokenın birleşmiş hali</param>
+        /// <param name="list">Generic list</param>
         private static void parse(string word, List<string> list)
         {
             foreach (var op in operators)

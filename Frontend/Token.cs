@@ -11,6 +11,7 @@ namespace Frontend
     {
         private static string[] line;
         private static readonly string[] variables = { "int", "string", "double" };
+
         /// <summary>
         /// Gelen satırda değişken kontrolü yapar.
         /// </summary>
@@ -20,7 +21,7 @@ namespace Frontend
         {
             string info = String.Empty;
             Token.line = line;
-
+            LexicalControl();
             if (!FirstLetter())
             {
                 return "ilk karakter hatası var...";
@@ -33,6 +34,8 @@ namespace Frontend
             {
                 return "tanımlamalar hatasız";
             }
+
+
         }
 
         /// <summary>
@@ -100,6 +103,11 @@ namespace Frontend
                 }
             }
             return control;
+        }
+
+        private static void LexicalControl()
+        {
+            Lexical.Analysis(Token.line);
         }
     }
 }
