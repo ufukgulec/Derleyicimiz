@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Frontend
 {
-    internal class SyntaxAnalysis
+    public static class Syntax
     {
-
+        public static bool Analysis(string[] words)
+        {
+            return true;
+        }
     }
 }

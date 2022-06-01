@@ -17,24 +17,19 @@ namespace Frontend
         /// </summary>
         /// <param name="line">Kod satırı</param>
         /// <returns></returns>
-        public static string Controls(string[] line)
+        public static bool Controls(string[] line)
         {
-            string info = String.Empty;
             Token.line = line;
-            LexicalControl();
-            if (!FirstLetter())
+
+            if (FirstLetter() && VariableControl() && LexicalControl())
             {
-                return "ilk karakter hatası var...";
-            }
-            else if (!VariableControl())
-            {
-                return "değişken tanımlama hatası var...";
+                //return "ilk karakter hatası var...";
+                return true;
             }
             else
             {
-                return "tanımlamalar hatasız";
+                return false;
             }
-
 
         }
 
@@ -105,9 +100,14 @@ namespace Frontend
             return control;
         }
 
-        private static void LexicalControl()
+        private static bool LexicalControl()
         {
-            Lexical.Analysis(Token.line);
+            return Lexical.Analysis(Token.line);
+        }
+
+        private static bool SyntaxControl()
+        {
+            return Syntax.Analysis(Token.line);
         }
     }
 }

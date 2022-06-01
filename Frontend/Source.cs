@@ -59,8 +59,14 @@ namespace Frontend
 
         private void ControlLine(string[] line)
         {
-            Console.WriteLine(String.Format("{0}. satırda {1} \n", LineNumber + 1, Token.Controls(line)));
-            //Token.Controls(line);
+            if (Token.Controls(line))
+            {
+                //Backend
+            }
+            else
+            {
+                Console.WriteLine(String.Format("{0}. satırda hata var \n", LineNumber + 1));
+            }
             Nextline();
         }
 
@@ -73,6 +79,7 @@ namespace Frontend
         public void Compile()
         {
             ReadLine();
+
         }
 
     }
