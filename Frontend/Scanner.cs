@@ -32,7 +32,7 @@ namespace Frontend
         /// </summary>
         /// <param name="LineNumber">Geçerli satır numarası</param>
         /// <returns>Satırdaki kelimeler,operatörler</returns>
-        public static string[] ReadLine(int LineNumber)
+        public static List<string> ReadLine(int LineNumber)
         {
             var line = Parser.Lexeme(SourceText[LineNumber]);
 

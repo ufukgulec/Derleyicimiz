@@ -9,7 +9,7 @@ namespace Frontend
 {
     public static class Token
     {
-        private static string[] line;
+        private static List<string> line;
         private static readonly string[] variables = { "int", "string", "double" };
 
         /// <summary>
@@ -17,11 +17,11 @@ namespace Frontend
         /// </summary>
         /// <param name="line">Kod satırı</param>
         /// <returns></returns>
-        public static bool Controls(string[] line)
+        public static bool Controls(List<string> line)
         {
             Token.line = line;
 
-            if (FirstLetter() && VariableControl() && LexicalControl())
+            if (FirstLetter() && VariableControl() && LexicalControl() && SyntaxControl())
             {
                 //return "ilk karakter hatası var...";
                 return true;
@@ -107,7 +107,7 @@ namespace Frontend
 
         private static bool SyntaxControl()
         {
-            return Syntax.Analysis(Token.line);
+            return Syntax.Analysis(Lexical.tokenAlignment);
         }
     }
 }

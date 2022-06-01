@@ -11,7 +11,7 @@ namespace Frontend
     public class Source
     {
         private string[] SourceText { get; set; }
-        private string[] Line { get; set; }
+        private List<string> Line { get; set; }
         private int LineNumber { get; set; }
         /// <summary>
         /// Verilen dizinle kodu işleme alır.
@@ -57,7 +57,7 @@ namespace Frontend
             }
         }
 
-        private void ControlLine(string[] line)
+        private void ControlLine(List<string> line)
         {
             if (Token.Controls(line))
             {

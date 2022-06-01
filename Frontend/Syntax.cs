@@ -8,8 +8,13 @@ namespace Frontend
 {
     public static class Syntax
     {
-        public static bool Analysis(string[] words)
+        public static bool Analysis(List<string> words)
         {
+            Console.WriteLine(" \nSyntax Satır dizilimi:");
+            foreach (var item in words)
+            {
+                Console.WriteLine(item);
+            }
             return true;
         }
     }

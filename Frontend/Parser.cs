@@ -15,7 +15,7 @@ namespace Frontend
         /// </summary>
         /// <param name="line">String halindeki satır</param>
         /// <returns>Lexeme yapılan dizi</returns>
-        public static string[] Lexeme(string line)
+        public static List<string> Lexeme(string line)
         {
             string[] words = line.Split(" ");
 
@@ -40,14 +40,7 @@ namespace Frontend
                 }
             }
 
-
-            string[] result = new string[list.Count];
-            for (int i = 0; i < result.Length; i++)
-            {
-                result[i] = list[i];
-            }
-
-            return result;
+            return list;
         }
         /// <summary>
         /// Bu metotta iki token yanyana gelince ayırmak için yazıldı.
